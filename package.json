@@ -1,0 +1,27 @@
+{
+  "name": "nodeClassesTest",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Тестовое задание для участия в Школе Node.JS",
+  "author": "Александр Ярёха",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:lss1ash/nodeClassesTest.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lss1ash/nodeClassesTest/issues"
+  },
+  "homepage": "https://github.com/lss1ash/nodeClassesTest",
+  "devDependencies": {
+    "eslint": "3.9.0",
+    "eslint-config-htmlacademy": "0.2.x"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "scripts": {
+    "test": "eslint js/"
+  },
+  "engines": {
+    "node": "^6.10"
+  }
+}
