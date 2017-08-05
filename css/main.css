@@ -27,21 +27,135 @@ body
 
 .main-section__header
 {
-    font-size: 60px;
+    font-size: 56px;
     font-weight: 400;
     font-style: normal;
 
-    margin: 50px auto;
+    margin: 70px auto 30px;
 
     text-align: center;
 }
 
 .main-section__my-form
 {
-    max-width: 700px;
-    height: 500px;
-    margin: 80px auto 40px;
+    max-width: 600px;
+    margin: 50px auto 40px;
+    padding: 15px 20px;
 
     background: #fff;
     box-shadow: 0 21px 40px 0 rgba(0,0,0,.19);
+}
+
+.main-section__single-line
+{
+    margin: 0;
+    padding: 15px 10px;
+
+    border: none;
+}
+
+.main-section__fio-label,
+.main-section__email-label,
+.main-section__phone-label
+{
+    font-family: Calibri,Helvetica,sans-serif;
+    font-size: 18px;
+
+    display: inline-block;
+
+    width: 20%;
+}
+
+.main-section__fio-text,
+.main-section__email-text,
+.main-section__phone-text
+{
+    font-family: Calibri,Helvetica,sans-serif;
+    font-size: 18px;
+
+    display: inline-block;
+
+    width: 75%;
+    margin: 0;
+    padding: 5px 10px;
+
+    text-overflow: ellipsis;
+
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.main-section__fio-text:focus,
+.main-section__email-text:focus,
+.main-section__phone-text:focus
+{
+    border-color: #d0ba65;
+    box-shadow: 0 0 10px #fc0;
+}
+
+.main-section__submit
+{
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 15px;
+    line-height: 32px;
+
+    position: relative;
+
+    padding: 0;
+    margin: 0 auto;
+
+    cursor: pointer;
+
+    color: #000;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.main-section__submit::before
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    padding: 0;
+
+    content: '';
+
+    border: 1px solid rgba(191,153,0,.8);
+    border-radius: 3px;
+    background-color: #ffdb4d;
+    background-clip: padding-box;
+}
+
+.main-section__submit:focus::before,
+.main-section__submit:hover::before
+{
+    border-color: #d0ba65;
+    box-shadow: 0 0 15px #fc0;
+}
+
+.main-section__submit:active::before
+{
+    background-color: #fc0;
+}
+
+.main-section__submit-text
+{
+    position: relative;
+
+    padding: 0 30px;
+
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.main-section__buttons-line {
+  text-align: center;
+  margin: 0;
+  padding: 15px 0;
+
+  border: none;
 }

@@ -13,16 +13,24 @@
 
     <form action="#" class="main-section__my-form" name="my-form" id="myForm" autocomplete="off">
 
-      <label for="fio" class="main-section__fio-label">ФИО:</label>
-      <input class="main-section__fio-text" type="text" name="fio" id="fio" required placeholder="Иванов Иван Иванович">
+      <fieldset class="main-section__single-line">
+        <label for="fio" class="main-section__fio-label">ФИО:</label>
+        <input class="main-section__fio-text" type="text" name="fio" id="fio" spellcheck="false" required autofocus placeholder="Иванов Иван Иванович">
+      </fieldset>
 
-      <label for="email" class="main-section__email-label">Email:</label>
-      <input class="main-section__email-text" type="email" name="email" id="email" required placeholder="youremail@yandex.ru">
+      <fieldset class="main-section__single-line">
+        <label for="email" class="main-section__email-label">Email:</label>
+        <input class="main-section__email-text" type="email" name="email" id="email" spellcheck="false" required placeholder="youremail@yandex.ru">
+      </fieldset>
 
-      <label for="phone" class="main-section__phone-label">Телефон:</label>
-      <input class="main-section__phone-text" type="text" name="phone" id="phone" required placeholder="+7(999)999-99-99">
+      <fieldset class="main-section__single-line">
+        <label for="phone" class="main-section__phone-label">Телефон:</label>
+        <input class="main-section__phone-text" type="text" name="phone" id="phone" spellcheck="false" required placeholder="+7(999)999-99-99">
+      </fieldset>
 
-      <button class="main-section__submit" type="submit" id="submitButton">Отправить</button>
+      <fieldset class="main-section__buttons-line">
+        <button class="main-section__submit" type="submit" id="submitButton"><span class="main-section__submit-text">Отправить</span></button>
+      </fieldset>
 
     </form>
 
