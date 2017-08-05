@@ -101,8 +101,8 @@ body
 
     position: relative;
 
-    padding: 0;
     margin: 0 auto;
+    padding: 0;
 
     cursor: pointer;
 
@@ -152,10 +152,26 @@ body
     pointer-events: none;
 }
 
-.main-section__buttons-line {
-  text-align: center;
-  margin: 0;
-  padding: 15px 0;
+.main-section__buttons-line
+{
+    margin: 0;
+    padding: 15px 0;
 
-  border: none;
+    text-align: center;
+
+    border: none;
+}
+
+.main-section__result
+{
+    font-family: Calibri,Helvetica,sans-serif;
+    font-size: 18px;
+
+    margin: 0;
+    padding: 5px 10px;
+}
+
+.error
+{
+    border: 1px solid red;
 }
