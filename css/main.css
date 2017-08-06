@@ -171,7 +171,12 @@ body
     padding: 5px 10px;
 }
 
-.error
+.error,
+.error:focus
 {
     border: 1px solid red;
+}
+
+.success {
+    border: 1px solid green;
 }
