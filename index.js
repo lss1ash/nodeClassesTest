@@ -1,80 +1,36 @@
 'use strict';
 
-(function () {
+(function (app) {
 
   var ERROR_CLASS = 'error';
-  var FIO_WORDS_COUNT = 3;
-  var PHONE_SUM = 30;
-
-  var myForm = document.getElementById('myForm');
-  var inputField = {
-    fio: myForm.querySelector('#fio'),
-    email: myForm.querySelector('#email'),
-    phone: myForm.querySelector('#phone')
-  };
-
-  var errorFields;
 
   // var submitButton = myForm.querySelector('#submitButton');
   // var resultContainer = myForm.querySelector('#resultContainer');
 
-  var isBasicallyValid = function (input) {
-    if (!input.validity.valid) {
-      errorFields.push(input.name);
-      return false;
-    }
-    return true;
-  };
-
-  var isSpeciallyValidFio = function () {
-    var fioWords = inputField.fio.value.trim().split(' ').filter(function (word) {
-      return word.length > 0;
-    }).length;
-    if (fioWords !== FIO_WORDS_COUNT) {
-      errorFields.push(inputField.fio.name);
-      return false;
-    }
-    return true;
-  };
-
-  var isSpeciallyValidPhone = function () {
-    var phoneSum = inputField.phone.value.replace(/\D/g, '').split('').reduce(function (sum, value) {
-      return +sum + +value;
-    }, 0);
-    if (phoneSum > PHONE_SUM) {
-      errorFields.push(inputField.phone.name);
-      return false;
-    }
-    return true;
-  };
-
   var clearInvalid = function () {
-    [inputField.fio, inputField.email, inputField.phone].forEach(function (field) {
+    [app.inputFields.fio, app.inputFields.email, app.inputFields.phone].forEach(function (field) {
       if (field.classList.contains(ERROR_CLASS)) {
         field.classList.remove(ERROR_CLASS);
       }
     });
   };
 
-  var markInvalid = function () {
-    errorFields.forEach(function (fieldName) {
+  var markInvalid = function (fields) {
+    fields.forEach(function (fieldName) {
       myForm.querySelector('input[name="' + fieldName + '"]').classList.add(ERROR_CLASS);
     });
   };
 
-  var validateForm = function (e) {
-    errorFields = [];
+  var submitForm = function (e) {
+    e.preventDefault();
     clearInvalid();
-    var fioValid = isBasicallyValid(inputField.fio) && isSpeciallyValidFio();
-    var emailValid = isBasicallyValid(inputField.email);
-    var phoneValid = isBasicallyValid(inputField.phone) && isSpeciallyValidPhone();
-
-    if (!(fioValid && emailValid && phoneValid)) {
-      markInvalid();
-      e.preventDefault();
+    var validity = app.validate();
+    if (!validity.isValid) {
+      markInvalid(validity.errorFields);
     }
   };
 
-  myForm.addEventListener('submit', validateForm);
+  var myForm = document.getElementById('myForm');
+  myForm.addEventListener('submit', submitForm);
 
-}());
+}(window.MyForm));
