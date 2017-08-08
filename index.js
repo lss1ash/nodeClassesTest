@@ -26,28 +26,26 @@
     return true;
   };
 
-  var isSpeciallyValid = function () {
-    var inputError = false;
-    if (!errorFields.includes('fio')) {
-      var fioWords = inputField.fio.value.trim().split(' ').filter(function (word) {
-        return word.length > 0;
-      }).length;
-      if (fioWords !== FIO_WORDS_COUNT) {
-        errorFields.push(inputField.fio.name);
-        inputError = true;
-      }
+  var isSpeciallyValidFio = function () {
+    var fioWords = inputField.fio.value.trim().split(' ').filter(function (word) {
+      return word.length > 0;
+    }).length;
+    if (fioWords !== FIO_WORDS_COUNT) {
+      errorFields.push(inputField.fio.name);
+      return false;
     }
+    return true;
+  };
 
-    if (!errorFields.includes('phone')) {
-      var phoneSum = inputField.phone.value.replace(/\D/g, '').split('').reduce(function (sum, value) {
-        return sum + value;
-      }, 0);
-      if (phoneSum > PHONE_SUM) {
-        errorFields.push(inputField.phone.name);
-        inputError = true;
-      }
+  var isSpeciallyValidPhone = function () {
+    var phoneSum = inputField.phone.value.replace(/\D/g, '').split('').reduce(function (sum, value) {
+      return +sum + +value;
+    }, 0);
+    if (phoneSum > PHONE_SUM) {
+      errorFields.push(inputField.phone.name);
+      return false;
     }
-    return inputError;
+    return true;
   };
 
   var clearInvalid = function () {
@@ -67,11 +65,11 @@
   var validateForm = function (e) {
     errorFields = [];
     clearInvalid();
-    var fullyValid = isBasicallyValid(inputField.fio) &
-                isBasicallyValid(inputField.email) &
-                isBasicallyValid(inputField.phone) &
-                isSpeciallyValid();
-    if (!fullyValid) {
+    var fioValid = isBasicallyValid(inputField.fio) && isSpeciallyValidFio();
+    var emailValid = isBasicallyValid(inputField.email);
+    var phoneValid = isBasicallyValid(inputField.phone) && isSpeciallyValidPhone();
+
+    if (!(fioValid && emailValid && phoneValid)) {
       markInvalid();
       e.preventDefault();
     }
