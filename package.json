@@ -14,7 +14,8 @@
   "homepage": "https://github.com/lss1ash/nodeClassesTest",
   "devDependencies": {
     "eslint": "3.9.0",
-    "eslint-config-htmlacademy": "0.2.x"
+    "eslint-config-htmlacademy": "0.2.x",
+    "local-web-server": "^2.2.3"
   },
   "license": "MIT",
   "dependencies": {},

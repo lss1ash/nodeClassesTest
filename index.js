@@ -3,8 +3,11 @@
 (function (app) {
 
   var ERROR_CLASS = 'error';
+
   var FIO_WORDS_COUNT = 3;
   var PHONE_SUM = 30;
+
+  var HTTP_SUCCESS = 200;
 
   var errorFields;
   app = {};
@@ -16,7 +19,7 @@
     phone: myForm.querySelector('#phone')
   };
   var submitButton = myForm.querySelector('#submitButton');
-  // var resultContainer = myForm.querySelector('#resultContainer');
+  var resultContainer = myForm.querySelector('#resultContainer');
 
 // Визуальное выделение невалидных полей //
 
@@ -66,6 +69,35 @@
     return true;
   };
 
+// AJAX-запрос
+
+  var sendAjax = function (url, successCallback, errorCallback) {
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.timeout = 10000;
+
+    xhr.onload = function () {
+      if (xhr.status === HTTP_SUCCESS) {
+        successCallback(xhr.response);
+      } else {
+        errorCallback('Что-то пошло не так :(');
+      }
+    };
+    xhr.onerror = function () {
+      errorCallback('Произошла ошибка соединения с сервером. Попробуйте позднее...');
+    };
+    xhr.ontimeout = function () {
+      errorCallback('Произошла ошибка соединения с сервером. Время ожидания ответа на запрос истекло...');
+    };
+
+    xhr.open('POST', url);
+    xhr.send();
+  };
+
+  var writeMessage = function (message) {
+    resultContainer.textContent = message;
+  };
+
 // validate в шлобальную область
 
   app.validate = function () {
@@ -91,6 +123,7 @@
       markInvalid(validity.errorFields);
     } else {
       submitButton.disabled = true;
+      sendAjax(myForm.getAttribute('action'), writeMessage, writeMessage);
     }
   };
 
