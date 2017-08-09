@@ -9,15 +9,14 @@
   var errorFields;
   app = {};
 
-  // var submitButton = myForm.querySelector('#submitButton');
-  // var resultContainer = myForm.querySelector('#resultContainer');
-
   var myForm = document.getElementById('myForm');
   var inputFields = {
     fio: myForm.querySelector('#fio'),
     email: myForm.querySelector('#email'),
     phone: myForm.querySelector('#phone')
   };
+  var submitButton = myForm.querySelector('#submitButton');
+  // var resultContainer = myForm.querySelector('#resultContainer');
 
 // Визуальное выделение невалидных полей //
 
@@ -82,12 +81,16 @@
     };
   };
 
+// submit в шлобальную область
+
   app.submit = function (e) {
     e.preventDefault();
     clearInvalid();
     var validity = app.validate();
     if (!validity.isValid) {
       markInvalid(validity.errorFields);
+    } else {
+      submitButton.disabled = true;
     }
   };
 
