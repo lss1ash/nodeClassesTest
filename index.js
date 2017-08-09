@@ -71,7 +71,7 @@
 
 // AJAX-запрос
 
-  var sendAjax = function (url, successCallback, errorCallback) {
+  var sendAjax = function (url, data, successCallback, errorCallback) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.timeout = 10000;
@@ -81,6 +81,7 @@
         successCallback(xhr.response);
       } else {
         errorCallback('Что-то пошло не так :(');
+        submitButton.disabled = false;
       }
     };
     xhr.onerror = function () {
@@ -90,15 +91,38 @@
       errorCallback('Произошла ошибка соединения с сервером. Время ожидания ответа на запрос истекло...');
     };
 
-    xhr.open('POST', url);
+    xhr.open('GET', url + '?' + data + '&time=' + (new Date()).getTime(), true);
     xhr.send();
+    // xhr.open('GET', url, true);
+    // xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    // xhr.send(data);
   };
 
   var writeMessage = function (message) {
-    resultContainer.textContent = message;
+    if (typeof message === 'object') {
+      resultContainer.classList.remove('success');
+      resultContainer.classList.remove('error');
+      resultContainer.classList.remove('progress');
+      switch (message.status) {
+        case 'success': resultContainer.textContent = 'Success';
+          resultContainer.classList.add('success');
+          submitButton.disabled = false;
+          break;
+        case 'error': resultContainer.textContent = message.reason;
+          resultContainer.classList.add('error');
+          submitButton.disabled = false;
+          break;
+        case 'progress': resultContainer.textContent = 'Progress';
+          resultContainer.classList.add('progress');
+          break;
+        default: resultContainer.textContent = 'Получен неизвестный ответ...';
+          resultContainer.classList.add('error');
+          submitButton.disabled = false;
+      }
+    }
   };
 
-// validate в шлобальную область
+// validate в глобальную область
 
   app.validate = function () {
     errorFields = [];
@@ -113,7 +137,7 @@
     };
   };
 
-// submit в шлобальную область
+// submit в глобальную область
 
   app.submit = function (e) {
     e.preventDefault();
@@ -123,7 +147,10 @@
       markInvalid(validity.errorFields);
     } else {
       submitButton.disabled = true;
-      sendAjax(myForm.getAttribute('action'), writeMessage, writeMessage);
+      var formData = 'fio=' + encodeURIComponent(inputFields.fio.value) +
+        '&email=' + encodeURIComponent(inputFields.email.value) +
+        '&phone=' + encodeURIComponent(inputFields.phone.value);
+      sendAjax(myForm.action, formData, writeMessage, writeMessage);
     }
   };
 
