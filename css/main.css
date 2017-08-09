@@ -137,6 +137,16 @@ body
     box-shadow: 0 0 15px #fc0;
 }
 
+.main-section__submit[disabled]::before {
+  border-color: gray;
+  box-shadow: none;
+  background-color: lightgray;
+}
+
+.main-section__submit[disabled] .main-section__submit-text {
+  color: gray;
+}
+
 .main-section__submit:active::before
 {
     background-color: #fc0;
