@@ -81,7 +81,6 @@
         successCallback(xhr.response);
       } else {
         errorCallback('Что-то пошло не так :(');
-        submitButton.disabled = false;
       }
     };
     xhr.onerror = function () {
@@ -93,8 +92,8 @@
 
     xhr.open('GET', url + '?' + data + '&time=' + (new Date()).getTime(), true);
     xhr.send();
-    // xhr.open('GET', url, true);
-    // xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    // xhr.open('POST', url, true);
+    // xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
     // xhr.send(data);
   };
 
@@ -119,6 +118,10 @@
           resultContainer.classList.add('error');
           submitButton.disabled = false;
       }
+    } else {
+      resultContainer.textContent = message;
+      resultContainer.classList.add('error');
+      submitButton.disabled = false;
     }
   };
 
