@@ -15,7 +15,7 @@
   "devDependencies": {
     "eslint": "3.9.0",
     "eslint-config-htmlacademy": "0.2.x",
-    "local-web-server": "^2.2.3"
+    "http-server": "^0.10.0"
   },
   "license": "MIT",
   "dependencies": {},
