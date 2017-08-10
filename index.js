@@ -127,7 +127,7 @@
     }
   };
 
-// validate в глобальную область
+// validate() => { isValid: Boolean, errorFields: String[] }
 
   app.validate = function () {
     errorFields = [];
@@ -142,7 +142,7 @@
     };
   };
 
-// submit в глобальную область
+// submit() => undefined
 
   app.submit = function () {
     clearInvalid();
@@ -158,11 +158,35 @@
     }
   };
 
-  var submitHandler = function (e) {
-    e.preventDefault();
-    app.submit();
+  // getData() => Object
+
+  app.getData = function () {
+    return {
+      fio: inputFields.fio.value,
+      email: inputFields.email.value,
+      phone: inputFields.phone.value
+    };
   };
 
-  myForm.addEventListener('submit', submitHandler);
+  // setData(Object) => undefined
+
+  app.setData = function (fields) {
+    if (typeof fields === 'object') {
+      if (fields.fio) {
+        inputFields.fio.value = fields.fio;
+      }
+      if (fields.email) {
+        inputFields.email.value = fields.email;
+      }
+      if (fields.phone) {
+        inputFields.phone.value = fields.phone;
+      }
+    }
+  };
+
+  myForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    app.submit();
+  });
 
 }(window.MyForm));
