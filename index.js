@@ -98,10 +98,11 @@
   };
 
   var writeMessage = function (message) {
+    resultContainer.classList.remove('success');
+    resultContainer.classList.remove('error');
+    resultContainer.classList.remove('progress');
+
     if (typeof message === 'object') {
-      resultContainer.classList.remove('success');
-      resultContainer.classList.remove('error');
-      resultContainer.classList.remove('progress');
       switch (message.status) {
         case 'success': resultContainer.textContent = 'Success';
           resultContainer.classList.add('success');
@@ -113,6 +114,7 @@
           break;
         case 'progress': resultContainer.textContent = 'Progress';
           resultContainer.classList.add('progress');
+          setTimeout(app.submit, message.timeout);
           break;
         default: resultContainer.textContent = 'Получен неизвестный ответ...';
           resultContainer.classList.add('error');
@@ -142,8 +144,7 @@
 
 // submit в глобальную область
 
-  app.submit = function (e) {
-    e.preventDefault();
+  app.submit = function () {
     clearInvalid();
     var validity = app.validate();
     if (!validity.isValid) {
@@ -157,6 +158,11 @@
     }
   };
 
-  myForm.addEventListener('submit', app.submit);
+  var submitHandler = function (e) {
+    e.preventDefault();
+    app.submit();
+  };
+
+  myForm.addEventListener('submit', submitHandler);
 
 }(window.MyForm));
