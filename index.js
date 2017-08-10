@@ -10,7 +10,6 @@
   var HTTP_SUCCESS = 200;
 
   var errorFields;
-  app = {};
 
   var myForm = document.getElementById('myForm');
   var inputFields = {
@@ -92,9 +91,6 @@
 
     xhr.open('GET', url + '?' + data + '&time=' + (new Date()).getTime(), true);
     xhr.send();
-    // xhr.open('POST', url, true);
-    // xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    // xhr.send(data);
   };
 
   var writeMessage = function (message) {
@@ -184,6 +180,7 @@
     }
   };
 
+  // По клику как-то нехорошо. Может лучше по сабмиту?
   myForm.addEventListener('submit', function (e) {
     e.preventDefault();
     app.submit();
