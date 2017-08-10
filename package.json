@@ -20,7 +20,8 @@
   "license": "MIT",
   "dependencies": {},
   "scripts": {
-    "test": "eslint js/"
+    "test": "eslint js/",
+    "start": "http-server"
   },
   "engines": {
     "node": "^6.10"
