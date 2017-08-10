@@ -76,7 +76,14 @@
     xhr.timeout = 10000;
 
     xhr.onload = function () {
-      if (xhr.status === HTTP_SUCCESS) {
+
+      // Для локального тестирования в Chrome:
+      // chrome.exe --allow-file-access-from-files
+      var localAccess = xhr.status === 0 && xhr.responseURL.substr(0, 5).toLowerCase() === 'file:';
+
+      // Или npm run start
+
+      if (xhr.status === HTTP_SUCCESS || localAccess) {
         successCallback(xhr.response);
       } else {
         errorCallback('Что-то пошло не так :(');
